@@ -49,14 +49,16 @@ Firstly, we checked the normality of features by using “sns.distplot”. Then,
 Firstly, we did hyperperameter tuning with numbers 15, 30, 35, 40, 45. After we fit kNN with “neighbors.KNeighborsClassifier(n_neighbors=n)”, we found that 35 is the best number of neighbors.Then, we used “log_loss” and “CVgeneric” to calculate the loss, test accuracy, and validation accuracy. Then we use “np.mean” to calculate average test accuracy and validation accuracy. After that, we used the scatter plot and line plot in matplotlib to plot “Number of Neighbors for kNN vs Average test accuracy” for both Method 1 and Method 2 data.
 ### Random forest:
 Firstly, we used “ensemble.RandomForestClassifier(n_estimators=1000,  criterion="entropy", max_depth=5, min_samples_split=3, max_features='log2’)” to fit the random forest model. Then, we used “log_loss” and “CVgeneric” to calculate the loss, test accuracy, and validation accuracy. Then we use “np.mean” to calculate average test accuracy and validation accuracy. After that, we used the scatter plot and line plot in matplotlib to plot a 5-Fold CV Test Set & Validation Set accuracy (Random forest), 5-Fold CV Loss (Random forest) for both Method 1 and Method 2.
-### Calc ROC: 
+
+## Calc ROC: 
 For each of the classifier above, on the Calc Roc part, we first pick out the model with best test accuracy during the cross validation, then we calculate the fpr,tpr,thre,roc_auc using sklearn.metrics. Then, we find the optimal cutoff point on the graph by finding the intersection of t line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. (Use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines)
-#### line(p1, p2): 
+### line(p1, p2): 
 take in two points, and return the y coordinate difference(A), x coordinate differnce(B), and the intercept.
-#### intersection(L1, L2): 
+### intersection(L1, L2): 
 take in two lines( in form of [point1_xcoordinate, point1_ycoordinate], [point2_xcoordinate, point2_ycoordinate]), and return the x coordinate, y coordinate of the intersection of two lines or False if two lines don't intersect.
-### Confusion Matrix:
-#### plot_confusion_matrix:
+## Confusion Matrix:
+### plot_confusion_matrix:
 This function will help you plot the confusion matrix. It takes in the true label of y_test, and the predicted labels output from your classifier, and you can choose to normalize the data or not, you can also input the title and color (cmap) for the plot.  
-### Convergence plot of coefficients:
+
+## Convergence plot of coefficients:
 After fitting logistics regression model, we took out coefficients for each features. We did a bootstrapping for 1000 times and each time randomly chose 25% of data. Then we used line plot to plot the data.
