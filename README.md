@@ -1,9 +1,9 @@
 # Stat-154-Project-2
 Cloud Data
 ## EDA:
-We started our project with exploratory data analysis. We firstly use some basic pandas methods to calculate the % of pixels for the different classes. Then we used Seaborn package to plot the expert label according to x, y coordinates. We also use “corr = image2.corr()” and “sns.heatmap” to plot the correlation of each variable. After that, we use “sns.boxplot” to plot the distribution of each variables hued by different expert labels. (All of the Problem 1 Section)
+We started our project with exploratory data analysis. We first use some basic pandas methods to calculate the % of pixels for the different classes. Then we used Seaborn package to plot the expert label according to x, y coordinates. We also use “corr = image2.corr()” and “sns.heatmap” to plot the correlation of each variable. After that, we use “sns.boxplot” to plot the distribution of each variables hued by different expert labels. (All of the Problem 1 Section)
 ## Preprocess Data: 
-To preprocess the data, we first drop all the unlabeled data since it doens't matter much for our prediction. You can not run this part if you want to keep the unlabeled data for future usage. 
+To preprocess the data, we first drop all the unlabeled data since it doens't matter much for our prediction. You can choose not to run this part if you want to keep the unlabeled data for future usage. 
 Then, we used two different ways of splitting the data. (Two ways of splitting the data are seperated in two different sections.)
 ### Method 1 Split
 For the whole merged data, we first divided the ranges of x-coordinate and y-coordinate into 20 groups and split the data into 400 small data chunks according to their x-coordinate and y-coordinate. Then, using np.random, 70%, 10%, and 10% of the 400 data chunks were randomly selected as training set, validation set, and test set respectively.
@@ -15,7 +15,7 @@ We split the data for each of image1 and image3 into 130 groups by 129 lines tha
 (the overall data is store as: dat_list as lists of pandas.DataFrame which contains 390 data chunks)
 
 ### [function] CVgeneric: 
-It's a generic cross validation function. It takes in:
+It's a generic cross validation function for Problem 3 to train and test the performance of different classifiers. It takes in:
      1. clf: generic classiffer,
      2. dat: training data chunks, 
      3. k: number of folds, 
@@ -37,10 +37,10 @@ It's a generic cross validation function. It takes in:
      4. K-fold CV models(list): model_list 
      
 ### Normalize:
-For better accuracy rate, we first perform normalization on both ways of splitting the data. We minus all the data chunks by the columnwise mean of X_train_val (merged dataframes of training and validation set), and divide all data by the columnwise std of X_train_val.
+For better accuracy rate, we first perform normalization on both data results from different ways of splitting. We minus all the data chunks by the columnwise mean of X_train_val (merged dataframes of training and validation set), and divide all data by the columnwise std of X_train_val.
 
-## Modeling
-#### For this part, both Method 1 Data and Method 2 Data are performed similarly
+## Modeling (Problem 3)
+#### For this part, both Method 1 Data and Method 2 Data are performed similarly and are seperate into Method 1, Method 2 chunk
 ### Logistic Regression: 
 To fit in logistic regression model, we used “linear_model.LogisticRegression(solver = 'lbfgs', multi_class='multinomial’)” Then, we used “log_loss” and “CVgeneric” to calculate the loss, test accuracy, and validation accuracy. Then we use “np.mean” to calculate average test accuracy and validation accuracy. Then, we used the scatter plot and line plot in matplotlib to plot a 5-Fold CV Test Set & Validation Set accuracy, 5-Fold CV Loss (Logistic Regression) for both Method 1 and Method 2.
 ### QDA:
