@@ -39,8 +39,8 @@ It's a generic cross validation function for Problem 3 to train and test the per
 ### Normalize:
 For better accuracy rate, we first perform normalization on both data results from different ways of splitting. We minus all the data chunks by the columnwise mean of X_train_val (merged dataframes of training and validation set), and divide all data by the columnwise std of X_train_val.
 
-## Modeling (Problem 3)
-#### For this part, both Method 1 Data and Method 2 Data are performed similarly and are seperate into Method 1, Method 2 chunk
+## Modeling (Problem 2)
+#### For this part, both Method 1 Data and Method 2 Data are performed similarly and for each classifier, we seperate them into Method 1, Method 2 chunk
 ### Logistic Regression: 
 To fit in logistic regression model, we used “linear_model.LogisticRegression(solver = 'lbfgs', multi_class='multinomial’)” Then, we used “log_loss” and “CVgeneric” to calculate the loss, test accuracy, and validation accuracy. Then we use “np.mean” to calculate average test accuracy and validation accuracy. Then, we used the scatter plot and line plot in matplotlib to plot a 5-Fold CV Test Set & Validation Set accuracy, 5-Fold CV Loss (Logistic Regression) for both Method 1 and Method 2.
 ### QDA:
@@ -50,15 +50,22 @@ Firstly, we did hyperperameter tuning with numbers 15, 30, 35, 40, 45. After we 
 ### Random forest:
 Firstly, we used “ensemble.RandomForestClassifier(n_estimators=1000,  criterion="entropy", max_depth=5, min_samples_split=3, max_features='log2’)” to fit the random forest model. Then, we used “log_loss” and “CVgeneric” to calculate the loss, test accuracy, and validation accuracy. Then we use “np.mean” to calculate average test accuracy and validation accuracy. After that, we used the scatter plot and line plot in matplotlib to plot a 5-Fold CV Test Set & Validation Set accuracy (Random forest), 5-Fold CV Loss (Random forest) for both Method 1 and Method 2.
 
-## Calc ROC: 
-For each of the classifier above, on the Calc Roc part, we first pick out the model with best test accuracy during the cross validation, then we calculate the fpr,tpr,thre,roc_auc using sklearn.metrics. Then, we find the optimal cutoff point on the graph by finding the intersection of t line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. (Use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines)
+## Calc ROC & Plot ROC (Problem 3b):
+For each of the classifier above, on the Calc Roc part at the end of each classifier, we first pick out the model with best test accuracy during the cross validation, then we calculate the respective fpr,tpr,thre,roc_auc using sklearn.metrics. Next, we find the optimal cutoff point on the graph by finding the intersection of the line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. We use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines, and plotting it.
 ### [function] line(p1, p2): 
-take in two points, and return the y coordinate difference(A), x coordinate differnce(B), and the intercept.
+take in two points (in the form of[point1 x_coordinate, point1 y coordinate], [point2 x coordinate, point2 y_coordinate]), and return the difference between two points' y coordinates(A), difference between two points' x coordinate(B), and the intercept(-C) of the line.
 ### [function] intersection(L1, L2): 
-take in two lines( in form of [point1_xcoordinate, point1_ycoordinate], [point2_xcoordinate, point2_ycoordinate]), and return the x coordinate, y coordinate of the intersection of two lines or False if two lines don't intersect.
-## Confusion Matrix:
-### [function] plot_confusion_matrix:
-This function will help you plot the confusion matrix. It takes in the true label of y_test, and the predicted labels output from your classifier, and you can choose to normalize the data or not, you can also input the title and color (cmap) for the plot.  
+take in two lines (in the form of [point1_xcoordinate, point1_ycoordinate], [point2_xcoordinate, point2_ycoordinate]), and return the (x coordinate, y coordinate) of the intersection of two lines or False if two lines don't intersect.
 
-## Convergence plot of coefficients:
-After fitting logistics regression model, we took out coefficients for each features. We did a bootstrapping for 1000 times and each time randomly chose 25% of data. Then we used line plot to plot the data.
+## Confusion Matrix (Problem 3c):
+### [function] plot_confusion_matrix:
+This function will help you plot the confusion matrix. It takes in the true label of y_test(y_true), and the predicted labels from your classifier(y_pred), and you can choose to normalize the data or not(normalize, default is False), you can also input the title (title, default is None) and color (cmap, defualt is Blues) for the plot.  
+
+## Convergence plot of coefficients (Problem 4a.):
+We did a bootstrapping for 1000 times for logistic regression on a randomly selected, 25% of the X_train_val, and Y_train_val data. Then we fit our logistics regression model on that data, and record the coefficients for 8 features. Next, we used line plot to plot the data to observe the stability of the coefficients of the features.
+
+## Box Plot for Random Forest (Problem 4b.):
+For our best classifier: Random Forest, we first record all the pixel that are misclassified, all the cloud pixel which are misclassied as cloudless pixel, and all the cloudless pixel which are misclassified as cloud pixel for each way of splitting the data. Then to visualize the pattern on the misclassification error for Random Forest, we plot out the box plot of all misclassified data, of misclassified cloud pixel, misclassified cloudless pixel, and the X_test set. 
+
+## Features V.S. Test Accuracy Rate(Problem 4c):
+We are curious about the relationship between features and test accuracy rate. Also, KNN performed pretty well for both ways of splitting the data. So, we loop through all different combanitions of n-features (3<= n <= 8), and perform the knn model with 35 n_neighbors (the param we chose after hyperparameter tuning in Modeling part) on data set, and record its accuracy rate. Then we plot the test accuracy rate for each combanition of features.
