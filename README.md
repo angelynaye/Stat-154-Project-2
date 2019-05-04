@@ -54,25 +54,25 @@ Firstly, we used “ensemble.RandomForestClassifier(n_estimators=1000,  criter
 For each of the classifier above, on the Calc Roc part at the end of each classifier, we first pick out the model with best test accuracy during the cross validation, then we calculate the respective fpr,tpr,thre,roc_auc using sklearn.metrics. Next, we find the optimal cutoff point on the graph by finding the intersection of the line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. We use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines, and plotting it.
 ### [function] line(p1, p2): 
 Input:
-  p1: point 1, a list in the form of [x_coordinate, y_coordinate]
-  p2: point 2, a list in the form of [x_coordinate, y_coordinate]
+  1. p1: point 1, a list in the form of [x_coordinate, y_coordinate] 
+  2. p2: point 2, a list in the form of [x_coordinate, y_coordinate] 
   
 Output:
-  suppose ax + by = c
-  A: Coefficient of x in the equation (a)
-  B: Coefficient of y in the equation (b)
-  C: the intercept the line (c)
+  suppose ax + by = c 
+  1. A: Coefficient of x in the equation (a) 
+  2. B: Coefficient of y in the equation (b) 
+  3. C: the intercept the line (c) 
 ### [function] intersection(L1, L2): 
 Function for calculating the intersection of two line using Cramer's Rule
 Input:
-      suppose ax + by = c
-      L1: line 1 in the form of [coeff of x1, coeff of y1, intercept]
-      L1: line 1 in the form of [coeff of x2, coeff of y2, intercept] 
+      suppose ax + by = c 
+      1. L1: line 1 in the form of [coeff of x1, coeff of y1, intercept] 
+      2. L1: line 1 in the form of [coeff of x2, coeff of y2, intercept]  
 Output: 
-      X coordinate of the intersection between L1 and L2
-      Y coordinate of the intersection between L1 and L2
-      or 
-      False if L1 and L2 don't have intersection
+      1. X coordinate of the intersection between L1 and L2 
+      2. Y coordinate of the intersection between L1 and L2 
+      or  
+      1. False if L1 and L2 don't have intersection 
 
 ## Confusion Matrix (Problem 3c):
 ### [function] plot_confusion_matrix:
