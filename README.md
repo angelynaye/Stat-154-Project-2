@@ -16,20 +16,20 @@ We split the data for each of image1 and image3 into 130 groups by 129 lines tha
 
 ### [function] CVgeneric: 
 It's a generic cross validation function for Problem 3 to train and test the performance of different classifiers. It takes in: 
-     1. clf: generic classiffer, 
+     1. clf: generic classiffer,   
      2. dat: training data chunks,  
      3. k: number of folds,  
-     4. loss_func: loss function, 
-     5. train_val_idx: list of available index to select data chunks from data chunks list if only consider data within training set and validation set, 
-     6. test_dat: list of test data in form of [features, labels] 
-     7. features list to train the model on: features (Default is all 8 features excluding x,y coordinates)
-     8. verbose: if True, it will print out all loss, accuracy, and test accuracy for all K-fold CV (Default is True)
-         
-   Output: 
-     1. K-fold CV loss on the training set(dictionary) in the form of {"CV1":loss} : results
-     2. K-fold CV accuracy on the val set(dictionary): accuracy 
-     3. K-fold CV test accuracy (dictionary): test_accuracy dic 
-     4. K-fold CV models(list): model_list  
+     4. loss_func: loss function,    
+     5. train_val_idx: list of available index to select data chunks from data chunks list if only consider data within training set and validation set,         
+     6. test_dat: list of test data in form of [features, labels]          
+     7. features list to train the model on: features (Default is all 8 features excluding x,y coordinates)       
+     8. verbose: if True, it will print out all loss, accuracy, and test accuracy for all K-fold CV (Default is True)    
+            
+   Output:    
+     1. K-fold CV loss on the training set(dictionary) in the form of {"CV1":loss} : results       
+     2. K-fold CV accuracy on the val set(dictionary): accuracy       
+     3. K-fold CV test accuracy (dictionary): test_accuracy dic       
+     4. K-fold CV models(list): model_list       
      
 ### Normalize:
 For better accuracy rate, we first perform normalization on both data results from different ways of splitting. We minus all the data chunks by the columnwise mean of X_train_val (merged dataframes of training and validation set), and divide all data by the columnwise std of X_train_val.
