@@ -15,26 +15,21 @@ We split the data for each of image1 and image3 into 130 groups by 129 lines tha
 (the overall data is store as: dat_list as lists of pandas.DataFrame which contains 390 data chunks)
 
 ### [function] CVgeneric: 
-It's a generic cross validation function for Problem 3 to train and test the performance of different classifiers. It takes in:
-     1. clf: generic classiffer,
-     2. dat: training data chunks, 
-     3. k: number of folds, 
-     4. loss_func: loss function,
-     5. train_val_idx: list of available index to select data chunks 
-          from data chunks list if only consider data within training 
-          set and validation set
-     6. test_dat: list of test data in form of [features, labels]
-     7. features list to train the model on: features (Default is all 8 features
-          excluding x,y coordinates)
-     8. verbose: if True, it will print out all loss, accuracy, and 
-         test accuracy for all K-fold CV (Default is True)
+It's a generic cross validation function for Problem 3 to train and test the performance of different classifiers. It takes in: 
+     1. clf: generic classiffer, 
+     2. dat: training data chunks,  
+     3. k: number of folds,  
+     4. loss_func: loss function, 
+     5. train_val_idx: list of available index to select data chunks from data chunks list if only consider data within training set and validation set, 
+     6. test_dat: list of test data in form of [features, labels] 
+     7. features list to train the model on: features (Default is all 8 features excluding x,y coordinates)
+     8. verbose: if True, it will print out all loss, accuracy, and test accuracy for all K-fold CV (Default is True)
          
-   Output:
-     1. K-fold CV loss on the training set(dictionary) in the form of 
-          {"CV1":loss} : results
-     2. K-fold CV accuracy on the val set(dictionary): accuracy
-     3. K-fold CV test accuracy (dictionary): test_accuracy dic
-     4. K-fold CV models(list): model_list 
+   Output: 
+     1. K-fold CV loss on the training set(dictionary) in the form of {"CV1":loss} : results
+     2. K-fold CV accuracy on the val set(dictionary): accuracy 
+     3. K-fold CV test accuracy (dictionary): test_accuracy dic 
+     4. K-fold CV models(list): model_list  
      
 ### Normalize:
 For better accuracy rate, we first perform normalization on both data results from different ways of splitting. We minus all the data chunks by the columnwise mean of X_train_val (merged dataframes of training and validation set), and divide all data by the columnwise std of X_train_val.
@@ -52,27 +47,27 @@ Firstly, we used “ensemble.RandomForestClassifier(n_estimators=1000,  criter
 
 ## Calc ROC & Plot ROC (Problem 3b):
 For each of the classifier above, on the Calc Roc part at the end of each classifier, we first pick out the model with best test accuracy during the cross validation, then we calculate the respective fpr,tpr,thre,roc_auc using sklearn.metrics. Next, we find the optimal cutoff point on the graph by finding the intersection of the line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. We use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines, and plotting it.
-### [function] line(p1, p2): 
-Input:
-  1. p1: point 1, a list in the form of [x_coordinate, y_coordinate] 
-  2. p2: point 2, a list in the form of [x_coordinate, y_coordinate] 
+### [function] line(p1, p2):  
+Input: 
+  1. p1: point 1, a list in the form of [x_coordinate, y_coordinate]  
+  2. p2: point 2, a list in the form of [x_coordinate, y_coordinate]  
   
-Output:
-  suppose ax + by = c 
+Output: 
+  suppose ax + by = c  
   1. A: Coefficient of x in the equation (a) 
   2. B: Coefficient of y in the equation (b) 
   3. C: the intercept the line (c) 
 ### [function] intersection(L1, L2): 
-Function for calculating the intersection of two line using Cramer's Rule
-Input:
-      suppose ax + by = c 
-      1. L1: line 1 in the form of [coeff of x1, coeff of y1, intercept] 
-      2. L1: line 1 in the form of [coeff of x2, coeff of y2, intercept]  
-Output: 
-      1. X coordinate of the intersection between L1 and L2 
-      2. Y coordinate of the intersection between L1 and L2 
-      or  
-      1. False if L1 and L2 don't have intersection 
+Function for calculating the intersection of two line using Cramer's Rule 
+Input: 
+      suppose ax + by = c  
+      1. L1: line 1 in the form of [coeff of x1, coeff of y1, intercept]  
+      2. L1: line 1 in the form of [coeff of x2, coeff of y2, intercept]   
+Output:  
+      1. X coordinate of the intersection between L1 and L2  
+      2. Y coordinate of the intersection between L1 and L2  
+      or   
+      1. False if L1 and L2 don't have intersection  
 
 ## Confusion Matrix (Problem 3c):
 ### [function] plot_confusion_matrix:
