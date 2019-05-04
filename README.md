@@ -14,7 +14,7 @@ We split the data for each of image1 and image3 into 130 groups by 129 lines tha
 (stored as features: X_train2, X_val2, X_test2, labels: y_train2, y_val2, y_test2)
 (the overall data is store as: dat_list as lists of pandas.DataFrame which contains 390 data chunks)
 
-### [function]CVgeneric: 
+### [function] CVgeneric: 
 It's a generic cross validation function. It takes in:
      1. clf: generic classiffer,
      2. dat: training data chunks, 
@@ -52,12 +52,12 @@ Firstly, we used “ensemble.RandomForestClassifier(n_estimators=1000,  criter
 
 ## Calc ROC: 
 For each of the classifier above, on the Calc Roc part, we first pick out the model with best test accuracy during the cross validation, then we calculate the fpr,tpr,thre,roc_auc using sklearn.metrics. Then, we find the optimal cutoff point on the graph by finding the intersection of t line connecting the left-upper corner and the right-lower corner of the unit square (the line TP = FP), and the ROC curve for each classifier. (Use function line(p1, p2), and function intersection(L1, L2) to claculate the intersections of two lines)
-### [function]line(p1, p2): 
+### [function] line(p1, p2): 
 take in two points, and return the y coordinate difference(A), x coordinate differnce(B), and the intercept.
-### [function]intersection(L1, L2): 
+### [function] intersection(L1, L2): 
 take in two lines( in form of [point1_xcoordinate, point1_ycoordinate], [point2_xcoordinate, point2_ycoordinate]), and return the x coordinate, y coordinate of the intersection of two lines or False if two lines don't intersect.
 ## Confusion Matrix:
-### [function]plot_confusion_matrix:
+### [function] plot_confusion_matrix:
 This function will help you plot the confusion matrix. It takes in the true label of y_test, and the predicted labels output from your classifier, and you can choose to normalize the data or not, you can also input the title and color (cmap) for the plot.  
 
 ## Convergence plot of coefficients:
